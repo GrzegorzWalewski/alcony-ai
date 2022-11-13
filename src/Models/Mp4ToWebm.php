@@ -38,7 +38,7 @@ class Mp4ToWebm
         $this->ftp = $ftp;
         $this->serverUrl = $this->config->getConfigValue('SERVER_URL');
         $this->uploadDir = $this->config->getConfigValue('UPLOAD_DIR');
-        $this->watermark = __DIR__ . '../Resources/watermark.gif';
+        $this->watermark = __DIR__ . '/../Resources/watermark.gif';
     }
 
     public function initialize(Message $message): void

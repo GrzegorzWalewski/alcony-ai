@@ -2,18 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Grzojda\AlconyAi;
+namespace Grzojda\AlconyAi\Models;
 
 use Discord\Discord;
 use Discord\Parts\Channel\Message;
 use Discord\Parts\User\User;
 use Discord\WebSockets\Event;
 use Exception;
-use Grzojda\AlconyAi\Models\Mp4ToWebm;
 use FFMpeg\FFMpeg;
-use Grzojda\AlconyAi\Models\Config;
-use Grzojda\AlconyAi\Models\FTP;
-use Grzojda\AlconyAi\Models\Util;
 use Grzojda\SimpleCache\SimpleCache;
 use Symfony\Component\Dotenv\Dotenv;
 
@@ -53,7 +49,7 @@ class Index
                     });
 
                     // Send message to bot developer for debug
-                    $user->sendMessage('Error: ' . $exception->getMessage() . ' in file "' . $exception->getFile() . '"(' . $exception->getLine() . ') Message was: ' . $message->content);
+                    $user->sendMessage('Error: ' . $exception->getMessage() . ' in file "' . $exception->getFile() . '"(' . $exception->getLine() . ')');
                 }
             });
         });
