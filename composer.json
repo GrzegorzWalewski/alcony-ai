@@ -1,0 +1,30 @@
+{
+    "name": "grzojda/alcony-ai",
+    "type": "library",
+    "version": "1.0.0",
+    "description": "Alcony Discord Bot",
+    "keywords": ["discord bot", "mp4ToWebm", "ftp"],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Grzegorz Walewski",
+            "email": "grzojda@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Grzojda\\AlconyAi\\": "src/"
+        }
+    },
+    "repositories": {
+        "grzojda/simple-cache": {
+            "type": "git",
+            "url": "https://github.com/GrzegorzWalewski/simple-cache"
+        }
+    },
+    "require": {
+        "php": ">=5.5",
+        "grzojda/simple-cache": "^1.0",
+        "symfony/dotenv": "^5.4"
+    }
+}
