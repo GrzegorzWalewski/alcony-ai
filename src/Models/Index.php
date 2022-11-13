@@ -19,14 +19,14 @@ use Symfony\Component\Dotenv\Dotenv;
 
 class Index
 {
-    private const CACHE_DIR = 'urls.json';
+    private const CACHE_NAME = 'urls.json';
 
     private Mp4ToWebm $mp4ToWebm;
     private Config $config;
 
     public function __construct()
     {
-        $simpleCache = new SimpleCache(self::CACHE_DIR);
+        $simpleCache = new SimpleCache(self::CACHE_NAME);
         $dotEnv = new Dotenv();
         $this->config = new Config($dotEnv);
         $FFMpeg = FFMpeg::create();
