@@ -56,7 +56,7 @@ class Mp4ToWebm
         if ($cached !== false) {
             $videoUrl = $cached;
         } else {
-            $fileName = $this->util->generateFileName($this->config->getConfigValue('prefix'), self::EXTENSION);
+            $fileName = $this->util->generateFileName($this->config->getConfigValue('FILE_PREFIX'), self::EXTENSION);
             $this->convert($url, $fileName);
             $this->ftp->upload($fileName);
             $videoUrl = $this->generateNewUrl($fileName);

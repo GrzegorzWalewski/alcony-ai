@@ -18,7 +18,7 @@ class FTP
         $this->serverIp = $config->getConfigValue('FTP_SERVER_IP');
         $this->user = $config->getConfigValue('FTP_USER');
         $this->password = $config->getConfigValue('FTP_PASSWORD');
-        $this->uploadDir = $config->getConfigValue('uploadDir');
+        $this->uploadDir = $config->getConfigValue('UPLOAD_DIR');
     }
 
     public function upload($file): bool
