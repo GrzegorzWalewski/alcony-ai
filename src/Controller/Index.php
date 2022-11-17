@@ -27,17 +27,18 @@ class Index
 
     private Mp4ToWebm $mp4ToWebm;
     private Config $config;
-    private array $commands;
+    private Commands $commands;
+    private Listeners $listeners;
 
     public function __construct()
     {
         $simpleCache = new SimpleCache(self::CACHE_NAME);
         $dotEnv = new Dotenv();
         $this->config = new Config($dotEnv);
-        $FFMpeg = FFMpeg::create();
-        $ftp = new FTP($this->config);
         $util = new Util();
-        $this->mp4ToWebm = new Mp4ToWebm($util, $simpleCache, $this->config, $FFMpeg, $ftp);
+
+        $this->commands = new Commands($simpleCache, $this->config, $util);
+        $this->listeners = new Listeners($simpleCache, $this->config, $util);
     }
 
     public function init(): void
@@ -49,54 +50,14 @@ class Index
         $discord->on('ready', function (Discord $discord) {
             echo "Bot is ready!", PHP_EOL;
 
-            $this->registerCommands();
-            $this->createCommands($discord);
-            $this->registerListeners($discord);
-            $this->listenCommands($discord);
+            $this->commands->init($discord);
+            $this->listeners->init($discord);
         });
 
         $discord->run();
     }
 
-    private function registerCommands(): void
-    {
-        $this->commands = [
-            new Regulations(),
-            new Functions()
-        ];
-    }
 
-    private function createCommands($discord)
-    {
-        foreach ($this->commands as $command) {
-            $command = new Command($discord, ['name' => $command->getName(), 'description' => $command->getDescription()]);
-        }
 
-        $discord->application->commands->save($command);
-    }
 
-    private function registerListeners($discord): void
-    {
-        $discord->on(Event::MESSAGE_CREATE, function (Message $message) use ($discord) {
-            try {
-                $this->mp4ToWebm->initialize($message);
-            } catch (Exception $exception) {
-                $user = $discord->users->find(function (User $user) {
-                    return $user->id == '163430231791632385';
-                });
-
-                // Send message to bot developer for debug
-                $user->sendMessage('Error: ' . $exception->getMessage() . ' in file "' . $exception->getFile() . '"(' . $exception->getLine() . ')');
-            }
-        });
-    }
-
-    private function listenCommands($discord)
-    {
-        foreach ($this->commands as $command) {
-            $discord->listenCommand($command->getName(), function (Interaction $interaction) use ($command) {
-                $command->execute($interaction);
-            });
-        }
-    }
 }

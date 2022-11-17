@@ -26,7 +26,10 @@
         "php": ">=7.4",
         "grzojda/simple-cache": "^1.0",
         "symfony/dotenv": "^5.4",
-        "team-reflex/discord-php": "^7.3",
-        "php-ffmpeg/php-ffmpeg": "^0.19.0"
+        "php-ffmpeg/php-ffmpeg": "^0.19.0",
+        "alaouy/youtube": "^2.2",
+        "norkunas/youtube-dl-php": "^2.1",
+        "ext-sodium": "*",
+        "team-reflex/discord-php": "dev-master"
     }
 }
