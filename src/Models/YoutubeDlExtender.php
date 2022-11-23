@@ -25,7 +25,7 @@ class YoutubeDlExtender extends YoutubeDl
     {
         $arguments = [
             '-g',
-            '--format=bestaudio'
+            '--format=worstaudio'
         ];
         $urls = $options->getUrl();
         foreach ($urls as $url) {
@@ -46,7 +46,7 @@ class YoutubeDlExtender extends YoutubeDl
             }
         });
 
-        return $audioUrls[0];
+        return trim($audioUrls[0]);
     }
 
     public function setBinPath(?string $binPath): self
